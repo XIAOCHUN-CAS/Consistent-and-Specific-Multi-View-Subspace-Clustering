@@ -125,18 +125,4 @@ maxmu=10^6;
     Clus = SpectralClustering(Z,clusters);
     time = toc;
     
-    %% evaluation
-    clus = bestMap(gt,Clus);
-    accr(m) = accur(gt,Clus);
-    pur(m) = purity(clus,gt);
-    nmix(m) = nmi(clus,double(gt));
-    ar(m) = adjrand(clus,gt);
-    [Fscore(m),RandIdx(m),Prec(m),Rec(m)]=FScr([gt,clus]);
 end  
-
-dataformat1 = 'nmi = %f+-%f, accuracy = %f+-%f, AR = %f+-%f, purity = %f+-%f\n';
-datavalue1 = [mean(nmix), var(nmix), mean(accr), var(accr), mean(ar), var(ar), mean(pur), var(pur), ];
-fprintf(dataformat1, datavalue1);
-dataformat = 'Fscore = %f+-%f, precision = %f+-%f, recall = %f+-%f, time = %f\n';
-dataValue = [mean(Fscore), var(Fscore), mean(Prec), var(Prec), mean(Rec), var(Rec), time];
-fprintf(dataformat, dataValue);
